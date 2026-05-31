@@ -1,5 +1,6 @@
 import { Card } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
+import { resolveColor } from "@/utils/color"
 import type { CategoryWithTodosResponse, CategoryResponse } from "@/types"
 import Link from "next/link"
 
@@ -16,7 +17,7 @@ export function CategoryCard({ category }: CategoryCardProps) {
     <Link href={`/category/${category.id}`}>
       <Card
         className="border-l-4 p-4 transition-colors hover:bg-muted/50"
-        style={{ borderLeftColor: category.color || "oklch(0.7 0 0)" }}
+        style={{ borderLeftColor: resolveColor(category.color) || "oklch(0.7 0 0)" }}
       >
         <div className="space-y-1.5">
           <h3 className="font-medium">{category.name}</h3>

@@ -12,7 +12,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Plus } from "lucide-react"
-import { PRESET_COLOR_NAMES } from "@/utils/color"
+import { PRESET_COLOR_NAMES, resolveColor } from "@/utils/color"
 
 export function CreateCategoryForm() {
   const [open, setOpen] = useState(false)
@@ -69,7 +69,7 @@ export function CreateCategoryForm() {
                   className={`h-8 w-8 rounded-full border-2 transition-all ${
                     color === c ? "border-foreground scale-110" : "border-transparent"
                   }`}
-                  style={{ backgroundColor: c }}
+                  style={{ backgroundColor: resolveColor(c) }}
                   onClick={() => setColor(c)}
                 />
               ))}

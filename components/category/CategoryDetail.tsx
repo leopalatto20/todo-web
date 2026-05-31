@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { ArrowLeft, Trash2 } from "lucide-react"
-import { PRESET_COLOR_NAMES } from "@/utils/color"
+import { PRESET_COLOR_NAMES, resolveColor } from "@/utils/color"
 
 export function CategoryDetail({ id }: { id: string }) {
   const router = useRouter()
@@ -72,7 +72,7 @@ export function CategoryDetail({ id }: { id: string }) {
                   className={`h-8 w-8 rounded-full border-2 transition-all ${
                     color === c ? "border-foreground scale-110" : "border-transparent"
                   }`}
-                  style={{ backgroundColor: c }}
+                  style={{ backgroundColor: resolveColor(c) }}
                   onClick={() => setColor(c)}
                 />
               ))}
@@ -93,7 +93,7 @@ export function CategoryDetail({ id }: { id: string }) {
             <div className="flex items-center gap-3">
               <span
                 className="h-4 w-4 rounded-full"
-                style={{ backgroundColor: category.color }}
+                style={{ backgroundColor: resolveColor(category.color) }}
               />
               <h1 className="text-2xl font-bold">{category.name}</h1>
             </div>

@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
+import { resolveColor } from "@/utils/color"
 import {
   Select,
   SelectContent,
@@ -192,7 +193,11 @@ export function TodoDetail({ id }: { id: string }) {
           {todo.categories.length > 0 && (
             <div className="flex flex-wrap gap-2">
               {todo.categories.map((cat) => (
-                <Badge key={cat.id} variant="secondary">
+                <Badge
+                  key={cat.id}
+                  className="text-xs"
+                  style={{ backgroundColor: resolveColor(cat.color), color: "white" }}
+                >
                   {cat.name}
                 </Badge>
               ))}

@@ -1,5 +1,5 @@
 import { initializeApp, type FirebaseApp } from "firebase/app"
-import { initializeAuth, type Auth } from "firebase/auth"
+import { getAuth, type Auth } from "firebase/auth"
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY!,
@@ -23,7 +23,7 @@ export function getFirebaseApp(): FirebaseApp {
 export function getFirebaseAuth(): Auth {
   if (!auth) {
     const a = getFirebaseApp()
-    auth = initializeAuth(a)
+    auth = getAuth(a)
   }
   return auth
 }
