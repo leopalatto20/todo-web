@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# todo-web
 
-## Getting Started
+Web client for the todo-list REST API. Built with Next.js 16, shadcn/ui, Tailwind CSS v4, TanStack Query, Zustand, and Firebase Auth.
 
-First, run the development server:
+## Prerequisites
+
+- [Bun](https://bun.sh) >= 1.2
+- Backend server running on `localhost:8080` (Quarkus)
+- Firebase project with **Email/Password** sign-in enabled
+
+## Tech stack
+
+| Concern | Choice |
+|---|---|
+| Framework | Next.js 16 App Router |
+| UI | shadcn/ui (Radix Nova), Radix UI, Lucide icons |
+| CSS | Tailwind CSS v4, tw-animate-css |
+| State | Zustand 5 + persist (localStorage) |
+| Data | TanStack React Query v5 |
+| HTTP | Axios |
+| Auth | Firebase Auth (email/password) |
+| Font | Geist (Geist + Geist_Mono) |
+
+## Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
+bun install
+```
+
+Copy `.env.example` to `.env.local` and fill in your Firebase project credentials:
+
+```bash
+cp .env.example .env.local
+```
+
+Required vars:
+
+```
+NEXT_PUBLIC_API_URL=http://localhost:8080
+NEXT_PUBLIC_FIREBASE_API_KEY=...
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=...
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=...
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=...
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=...
+NEXT_PUBLIC_FIREBASE_APP_ID=...
+```
+
+## Development
+
+```bash
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Commands
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command | Description |
+|---|---|
+| `bun dev` | Start dev server (Turbopack) |
+| `bun run build` | Production build |
+| `bun run lint` | Run ESLint |
+| `bunx shadcn add <component>` | Install a shadcn UI component |
 
-## Learn More
+## Project structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+types/          OpenAPI type definitions
+config/         Firebase app + auth init
+services/       Axios CRUD objects
+stores/         Zustand auth store (localStorage)
+hooks/          TanStack Query v5 hooks
+utils/          Date, priority, color helpers
+components/
+  ui/           shadcn UI primitives
+  todo/         TodoCard, TodoDetail, CreateTodoForm
+  category/     CategoryCard, CategoryDetail, CreateCategoryForm
+  sidebar.tsx   Dashboard sidebar navigation
+  auth-guard.tsx  Client-side route protection
+  providers.tsx   QueryClient + AuthGuard + layout
+app/            Next.js App Router pages
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Architecture
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+Page → Hook (TanStack Query v5) → Service (Axios) → REST API (localhost:8080)
 
-## Deploy on Vercel
+Auth: Firebase Auth → Zustand store → Axios interceptor (Bearer token)
+```
+## Deployed URL 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+todo-web-alpha-seven.vercel.app
