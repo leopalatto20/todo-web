@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, type ReactNode } from "react"
 import { useCreateCategory } from "@/hooks/useCategories"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,10 +11,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Plus } from "lucide-react"
 import { PRESET_COLOR_NAMES, resolveColor } from "@/utils/color"
 
-export function CreateCategoryForm() {
+interface CreateCategoryFormProps {
+  trigger?: ReactNode
+}
+
+export function CreateCategoryForm({ trigger }: CreateCategoryFormProps) {
   const [open, setOpen] = useState(false)
   const [name, setName] = useState("")
   const [description, setDescription] = useState("")
@@ -33,9 +36,7 @@ export function CreateCategoryForm() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="icon" className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg">
-          <Plus className="h-6 w-6" />
-        </Button>
+        {trigger || <Button>New category</Button>}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

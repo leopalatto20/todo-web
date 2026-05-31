@@ -6,6 +6,8 @@ import { TodoCard } from "@/components/todo/TodoCard"
 import { Input } from "@/components/ui/input"
 import { SearchIcon } from "lucide-react"
 
+const priorities = ["HIGH", "MEDIUM", "LOW"] as const
+
 export default function SearchPage() {
   const [query, setQuery] = useState("")
   const [priority, setPriority] = useState<string | undefined>()
@@ -14,8 +16,8 @@ export default function SearchPage() {
   })
 
   return (
-    <div className="mx-auto max-w-2xl p-4 pb-20">
-      <h1 className="mb-6 text-2xl font-bold">Search</h1>
+    <div className="mx-auto max-w-3xl p-6">
+      <h1 className="mb-8 text-2xl font-semibold tracking-tight">Search</h1>
       <div className="relative mb-4">
         <SearchIcon className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
         <Input
@@ -25,8 +27,8 @@ export default function SearchPage() {
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
-      <div className="mb-4 flex gap-2">
-        {(["HIGH", "MEDIUM", "LOW"] as const).map((p) => (
+      <div className="mb-6 flex gap-2">
+        {priorities.map((p) => (
           <button
             key={p}
             onClick={() => setPriority(priority === p ? undefined : p)}
@@ -40,7 +42,7 @@ export default function SearchPage() {
           </button>
         ))}
       </div>
-      <div className="space-y-3">
+      <div className="space-y-2">
         {results?.map((todo) => (
           <TodoCard key={todo.id} todo={todo} onToggle={() => {}} />
         ))}
