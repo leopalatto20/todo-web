@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { ListTodo, FolderKanban, Search, LogOut } from "lucide-react"
+import { ListTodo, FolderKanban, Search, Info, LogOut } from "lucide-react"
 import { useAuthStore } from "@/stores/authStore"
 import { useSignOut } from "@/hooks/useAuth"
 
@@ -10,6 +10,7 @@ const links = [
   { href: "/todos", label: "Todos", icon: ListTodo },
   { href: "/categories", label: "Categories", icon: FolderKanban },
   { href: "/search", label: "Search", icon: Search },
+  { href: "/about", label: "About", icon: Info },
 ]
 
 export function Sidebar() {
