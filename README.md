@@ -88,6 +88,6 @@ Page → Hook (TanStack Query v5) → Service (Axios) → REST API (localhost:80
 
 Auth: Firebase Auth → Zustand store → Axios interceptor (Bearer token)
 ```
-## Deployed URL 
+## Deployed URL
 
-todo-web-alpha-seven.vercel.app
+Frontend deployed at [todo-web](https://todo-web-alpha-seven.vercel.app).
